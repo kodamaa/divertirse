@@ -5,7 +5,7 @@
 <ul>
 <% @posts.each do |post| %>
 <li id="post_<%= post.id %>">
-<%= link_to post.title, post_path(post) %> (<%= post.comments.size %>)
+<%= link_to post.title, post_path(post) %> <%=Post.where(params[:post]).pluck(:created_at).first.strftime("%Y年%m月%d日%H%M")%>(<%= post.comments.size %>)
 <%= link_to 'Edit', edit_post_path(post) %>
 <%= link_to 'Delete', post, :confirm => "sure",
                             :method => :delete,
