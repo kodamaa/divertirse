@@ -1,3 +1,7 @@
+<div id="header">
+  <%= link_to 'home' , posts_path %>
+</div>
+
 <h1><%= @post.title %></h1>
 
 <p><%= simple_format(@post.content) %></p>
@@ -43,7 +47,6 @@
 </div>
 
 <% end %>
-<%= link_to 'home' , posts_path %>
 
 <script>
 $(function(){
