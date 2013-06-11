@@ -6,17 +6,29 @@
 
 <h1>Posts</h1>
 
-<ul>
+<table id="posts-table">
+<tr>
+    <th>タイトル</th>
+    <th>投稿者</th>
+    <th>投稿日</th>
+    <th>カテゴリ</th>
+    <th>コメント</th>
+    <th> </th>
+</tr>
 <% @posts.each do |post| %>
-<li id="post_<%= post.id %>">
-<%= link_to post.title, post_path(post) %> <%=Post.where(params[:post]).pluck(:created_at).first.strftime("%Y年%m月%d日%H%M")%>(<%= post.comments.size %>)
-<%= link_to 'Edit', edit_post_path(post) %>
-<%= link_to 'Delete', post, :confirm => "sure",
+<tr id="post_<%= post.id %>">
+    <td><%= link_to post.title, post_path(post) %></td>
+    <td></td>
+    <td><%=Post.where(params[:post]).pluck(:created_at).first.strftime("%Y/%m/%d %H:%M")%></td>
+    <td></td>
+    <td>(<%= post.comments.size %>)</td>
+    <td><%= link_to 'Edit', edit_post_path(post) %>
+        <%= link_to 'Delete', post, :confirm => "sure",
                             :method => :delete,
-                            :remote => :true %>
-</li>
+                            :remote => :true %></td>
+</tr>
 <% end %>
-</ul>
+</table>
 
 <script>
 $(function(){
