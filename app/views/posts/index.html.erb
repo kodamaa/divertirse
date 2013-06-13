@@ -19,7 +19,7 @@
 <tr id="post_<%= post.id %>">
     <td><%= link_to post.title, post_path(post) %></td>
     <td></td>
-    <td><%=Post.where(params[:post]).pluck(:created_at).first.strftime("%Y/%m/%d %H:%M")%></td>
+    <td><%= post.created_at.strftime("%Y/%m/%d %H:%M") %></td>
     <td></td>
     <td>(<%= post.comments.size %>)</td>
     <td><%= link_to 'Edit', edit_post_path(post) %>
