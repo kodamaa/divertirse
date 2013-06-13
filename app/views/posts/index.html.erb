@@ -18,9 +18,9 @@
 <% @posts.each do |post| %>
 <tr id="post_<%= post.id %>">
     <td><%= link_to post.title, post_path(post) %></td>
-    <td></td>
+    <td><%= post.author %></td>
     <td><%= post.created_at.strftime("%Y/%m/%d %H:%M") %></td>
-    <td></td>
+    <td><%= post.category %></td>
     <td>(<%= post.comments.size %>)</td>
     <td><%= link_to 'Edit', edit_post_path(post) %>
         <%= link_to 'Delete', post, :confirm => "sure",
