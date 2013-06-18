@@ -6,4 +6,7 @@ class Post < ActiveRecord::Base
   validates :title, :presence => true
   validates :content, :presence => true,
                      :length => {:minimum => 5}
+
+  default_scope :order => 'created_at DESC'
+  paginates_per 5
 end
