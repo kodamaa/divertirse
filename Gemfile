@@ -39,3 +39,10 @@ gem 'kaminari'
 
 # To use debugger
 # gem 'ruby-debug'
+
+# console and debug
+group :development do
+  gem 'pry-rails'
+  gem 'pry-debugger'
+  gem 'rails_best_practices', :require => false
+end
