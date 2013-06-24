@@ -1,0 +1,22 @@
+# rails
+*.rbc
+*.sassc
+.sass-cache
+capybara-*.html
+.rspec
+urvmrc
+/.bundle
+/vendor/bundle
+/log/*
+/tmp/*
+#/db/*.sqlite3
+/public/system/*
+/coverage/
+/spec/tmp/*
+**.orig
+rerun.txt
+pickle-email-*.html
+.project
+
+# mac
+.DS_Store
