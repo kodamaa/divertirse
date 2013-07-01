@@ -14,6 +14,13 @@ class PostsController < ApplicationController
 
   def new
   	@post = Post.new
+    @categories = Category.all
+    @array = []
+    
+    @categories.each do |categories|
+       @array << [categories.category_name,categories.id]
+    end
+
   end
 
   def create
