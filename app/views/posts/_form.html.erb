@@ -25,10 +25,8 @@
 	<%= f.text_field :author %>
 </div>
 
-<div class="field">
-	<%= f.label :category %>
-	<%= f.text_field :category %>
-</div>
+<%= f.select :category_id, @array %>
+
 
 <div class="actions">
 	<%= f.submit %>
