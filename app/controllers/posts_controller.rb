@@ -17,8 +17,8 @@ class PostsController < ApplicationController
     @categories = Category.all
     @array = []
     
-    @categories.each do |categories|
-       @array << [categories.category_name,categories.id]
+    @categories.each do |category|
+       @array << [category.category_name, category.id]
     end
 
   end
