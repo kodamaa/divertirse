@@ -8,10 +8,11 @@
 
 <h2>Comments</h2>
 <ul>
-<% if @post.comments.any? %>
-<% @post.comments.each do |comment| %>
+<% comments = @post.comments.select{|comment| comment.id != nil} %>
+<% if comments.any? %>
+<% comments.each do |comment| %>
 <li id="comment_<%= comment.id %>" >
-<%= simple_format(comment.body) %> (by<%= comment.commenter %>)
+<%= simple_format(comment.body) %> (by <%= comment.commenter %>)
 <%= link_to 'delete', [comment.post, comment], :confirm => 'Sure?',
                                                :method => :delete,
                                                :remote => :true %>
