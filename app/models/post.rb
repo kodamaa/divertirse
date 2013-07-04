@@ -2,8 +2,6 @@ class Post < ActiveRecord::Base
   attr_accessible :content, :title, :author, :category_id
 
   has_many :comments
-  # belongs_to :category
-
 
   validates :title, :presence => true
   validates :content, :presence => true,
