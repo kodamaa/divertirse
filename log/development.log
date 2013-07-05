@@ -19713,3 +19713,340 @@ Served asset /comments.js - 304 Not Modified (0ms)
 
 Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-07-06 03:07:51 +0900
 Served asset /application.js - 304 Not Modified (0ms)
+Connecting to database specified by database.yml
+  [1m[36m (0.2ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (2.1ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (1.9ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.2ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+Migrating to CreatePosts (20130527131630)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  CREATE TABLE "posts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255), "content" text, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20130527131630')[0m
+  [1m[35m (5.3ms)[0m  commit transaction
+Migrating to CreateComments (20130602051352)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.8ms)[0m  CREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "commenter" varchar(255), "body" text, "post_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.3ms)[0m  [1mCREATE INDEX "index_comments_on_post_id" ON "comments" ("post_id")[0m
+  [1m[35m (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20130602051352')
+  [1m[36m (3.9ms)[0m  [1mcommit transaction[0m
+Migrating to AddColumnsToPosts (20130613145517)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.7ms)[0m  [1mALTER TABLE "posts" ADD "user_id" varchar(255)[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "posts" ADD "category_id" integer
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20130613145517')[0m
+  [1m[35m (14.8ms)[0m  commit transaction
+Migrating to CreateCategories (20130629071017)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (3.4ms)[0m  CREATE TABLE "categories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "category_name" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20130629071017')[0m
+  [1m[35m (9.4ms)[0m  commit transaction
+Migrating to AddColorToCategories (20130704135152)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.8ms)[0m  ALTER TABLE "categories" ADD "color" varchar(255)
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20130704135152')[0m
+  [1m[35m (1.9ms)[0m  commit transaction
+Migrating to CreateUsers (20130704140323)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_name" varchar(255), "admin_fleg" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20130704140323')[0m
+  [1m[35m (1.8ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Connecting to database specified by database.yml
+
+
+Started GET "/posts" for 127.0.0.1 at 2013-07-06 03:21:51 +0900
+Processing by PostsController#index as HTML
+  [1m[36mPost Load (0.3ms)[0m  [1mSELECT "posts".* FROM "posts" ORDER BY created_at DESC[0m
+  [1m[35mPost Load (0.4ms)[0m  SELECT "posts".* FROM "posts" ORDER BY created_at DESC LIMIT 10 OFFSET 0
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "posts" [0m
+  Rendered posts/index.html.erb within layouts/application (19.4ms)
+Completed 200 OK in 219ms (Views: 179.8ms | ActiveRecord: 4.9ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-07-06 03:21:51 +0900
+Served asset /application.css - 304 Not Modified (11ms)
+
+
+Started GET "/assets/posts.css?body=1" for 127.0.0.1 at 2013-07-06 03:21:51 +0900
+Served asset /posts.css - 304 Not Modified (5ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-07-06 03:21:51 +0900
+Served asset /jquery.js - 304 Not Modified (12ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-07-06 03:21:51 +0900
+Served asset /jquery_ujs.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/comments.css?body=1" for 127.0.0.1 at 2013-07-06 03:21:51 +0900
+Served asset /comments.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/comments.js?body=1" for 127.0.0.1 at 2013-07-06 03:21:51 +0900
+Served asset /comments.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/posts.js?body=1" for 127.0.0.1 at 2013-07-06 03:21:51 +0900
+Served asset /posts.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-07-06 03:21:51 +0900
+Served asset /application.js - 304 Not Modified (62ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2013-07-06 03:21:56 +0900
+Processing by PostsController#new as HTML
+  [1m[35mCategory Load (0.2ms)[0m  SELECT "categories".* FROM "categories" 
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" [0m
+  Rendered posts/_form.html.erb (110.9ms)
+  Rendered posts/new.html.erb within layouts/application (113.3ms)
+Completed 200 OK in 196ms (Views: 148.5ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-07-06 03:21:56 +0900
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/comments.css?body=1" for 127.0.0.1 at 2013-07-06 03:21:56 +0900
+Served asset /comments.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/posts.css?body=1" for 127.0.0.1 at 2013-07-06 03:21:56 +0900
+Served asset /posts.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-07-06 03:21:56 +0900
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-07-06 03:21:56 +0900
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/posts.js?body=1" for 127.0.0.1 at 2013-07-06 03:21:56 +0900
+Served asset /posts.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/comments.js?body=1" for 127.0.0.1 at 2013-07-06 03:21:56 +0900
+Served asset /comments.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-07-06 03:21:56 +0900
+Served asset /application.js - 304 Not Modified (0ms)
+Connecting to database specified by database.yml
+  [1m[36m (0.2ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (8.4ms)[0m  [1mINSERT INTO "categories" ("category_name", "color", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["category_name", "testA"], ["color", nil], ["created_at", Fri, 05 Jul 2013 18:22:11 UTC +00:00], ["updated_at", Fri, 05 Jul 2013 18:22:11 UTC +00:00]]
+  [1m[35m (3.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "categories" ("category_name", "color", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["category_name", "testB"], ["color", nil], ["created_at", Fri, 05 Jul 2013 18:22:11 UTC +00:00], ["updated_at", Fri, 05 Jul 2013 18:22:11 UTC +00:00]]
+  [1m[36m (2.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "categories" ("category_name", "color", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["category_name", "testC"], ["color", nil], ["created_at", Fri, 05 Jul 2013 18:22:11 UTC +00:00], ["updated_at", Fri, 05 Jul 2013 18:22:11 UTC +00:00]]
+  [1m[35m (2.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "categories" ("category_name", "color", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["category_name", "testD"], ["color", nil], ["created_at", Fri, 05 Jul 2013 18:22:11 UTC +00:00], ["updated_at", Fri, 05 Jul 2013 18:22:11 UTC +00:00]]
+  [1m[36m (6.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.9ms)[0m  [1mINSERT INTO "categories" ("category_name", "color", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["category_name", "testE"], ["color", nil], ["created_at", Fri, 05 Jul 2013 18:22:11 UTC +00:00], ["updated_at", Fri, 05 Jul 2013 18:22:11 UTC +00:00]]
+  [1m[35m (2.5ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.9ms)[0m  INSERT INTO "users" ("admin_fleg", "created_at", "updated_at", "user_name") VALUES (?, ?, ?, ?)  [["admin_fleg", nil], ["created_at", Fri, 05 Jul 2013 18:22:11 UTC +00:00], ["updated_at", Fri, 05 Jul 2013 18:22:11 UTC +00:00], ["user_name", "userA"]]
+  [1m[36m (46.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.9ms)[0m  [1mINSERT INTO "users" ("admin_fleg", "created_at", "updated_at", "user_name") VALUES (?, ?, ?, ?)[0m  [["admin_fleg", nil], ["created_at", Fri, 05 Jul 2013 18:22:11 UTC +00:00], ["updated_at", Fri, 05 Jul 2013 18:22:11 UTC +00:00], ["user_name", "userB"]]
+  [1m[35m (6.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "users" ("admin_fleg", "created_at", "updated_at", "user_name") VALUES (?, ?, ?, ?)  [["admin_fleg", nil], ["created_at", Fri, 05 Jul 2013 18:22:11 UTC +00:00], ["updated_at", Fri, 05 Jul 2013 18:22:11 UTC +00:00], ["user_name", "userC"]]
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "users" ("admin_fleg", "created_at", "updated_at", "user_name") VALUES (?, ?, ?, ?)[0m  [["admin_fleg", nil], ["created_at", Fri, 05 Jul 2013 18:22:11 UTC +00:00], ["updated_at", Fri, 05 Jul 2013 18:22:11 UTC +00:00], ["user_name", "userD"]]
+  [1m[35m (1.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.9ms)[0m  INSERT INTO "users" ("admin_fleg", "created_at", "updated_at", "user_name") VALUES (?, ?, ?, ?)  [["admin_fleg", nil], ["created_at", Fri, 05 Jul 2013 18:22:11 UTC +00:00], ["updated_at", Fri, 05 Jul 2013 18:22:11 UTC +00:00], ["user_name", "userE"]]
+  [1m[36m (1.8ms)[0m  [1mcommit transaction[0m
+Connecting to database specified by database.yml
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2013-07-06 03:22:27 +0900
+Processing by PostsController#new as HTML
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT "categories".* FROM "categories" [0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" 
+  Rendered posts/_form.html.erb (103.8ms)
+  Rendered posts/new.html.erb within layouts/application (114.7ms)
+Completed 200 OK in 359ms (Views: 231.3ms | ActiveRecord: 5.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-07-06 03:22:28 +0900
+Served asset /application.css - 304 Not Modified (7ms)
+
+
+Started GET "/assets/posts.css?body=1" for 127.0.0.1 at 2013-07-06 03:22:28 +0900
+Served asset /posts.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-07-06 03:22:28 +0900
+Served asset /jquery.js - 304 Not Modified (7ms)
+
+
+Started GET "/assets/comments.css?body=1" for 127.0.0.1 at 2013-07-06 03:22:28 +0900
+Served asset /comments.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-07-06 03:22:28 +0900
+Served asset /jquery_ujs.js - 304 Not Modified (8ms)
+
+
+Started GET "/assets/comments.js?body=1" for 127.0.0.1 at 2013-07-06 03:22:28 +0900
+Served asset /comments.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/posts.js?body=1" for 127.0.0.1 at 2013-07-06 03:22:28 +0900
+Served asset /posts.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-07-06 03:22:28 +0900
+Served asset /application.js - 304 Not Modified (8ms)
+
+
+Started POST "/posts" for 127.0.0.1 at 2013-07-06 03:22:37 +0900
+Processing by PostsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"T5z2XfyuSfbHb5Sgpxp8RgiG8/sxqn2YLlTkH86wl9c=", "post"=>{"title"=>"rwqrwr", "content"=>"qwrwqrqwrq", "user_id"=>"3", "category_id"=>"4"}, "commit"=>"登録する"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (9.2ms)[0m  INSERT INTO "posts" ("category_id", "content", "created_at", "title", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?, ?)  [["category_id", 4], ["content", "qwrwqrqwrq"], ["created_at", Fri, 05 Jul 2013 18:22:37 UTC +00:00], ["title", "rwqrwr"], ["updated_at", Fri, 05 Jul 2013 18:22:37 UTC +00:00], ["user_id", "3"]]
+  [1m[36m (2.7ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/posts
+Completed 302 Found in 19ms (ActiveRecord: 12.1ms)
+
+
+Started GET "/posts" for 127.0.0.1 at 2013-07-06 03:22:37 +0900
+Processing by PostsController#index as HTML
+  [1m[35mPost Load (0.4ms)[0m  SELECT "posts".* FROM "posts" ORDER BY created_at DESC
+  [1m[36mPost Load (0.5ms)[0m  [1mSELECT "posts".* FROM "posts" ORDER BY created_at DESC LIMIT 10 OFFSET 0[0m
+  [1m[35mCategory Load (0.3ms)[0m  SELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", "3"]]
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 1
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "posts" [0m
+  Rendered posts/index.html.erb within layouts/application (118.5ms)
+Completed 200 OK in 164ms (Views: 158.8ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-07-06 03:22:37 +0900
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/comments.css?body=1" for 127.0.0.1 at 2013-07-06 03:22:37 +0900
+Served asset /comments.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/posts.css?body=1" for 127.0.0.1 at 2013-07-06 03:22:37 +0900
+Served asset /posts.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/posts.js?body=1" for 127.0.0.1 at 2013-07-06 03:22:37 +0900
+Served asset /posts.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/comments.js?body=1" for 127.0.0.1 at 2013-07-06 03:22:37 +0900
+Served asset /comments.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-07-06 03:22:37 +0900
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-07-06 03:22:37 +0900
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-07-06 03:22:37 +0900
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/posts" for 127.0.0.1 at 2013-07-06 03:26:19 +0900
+Processing by PostsController#index as HTML
+  [1m[35mPost Load (0.6ms)[0m  SELECT "posts".* FROM "posts" ORDER BY created_at DESC
+  [1m[36mPost Load (0.4ms)[0m  [1mSELECT "posts".* FROM "posts" ORDER BY created_at DESC LIMIT 10 OFFSET 0[0m
+  [1m[35mCategory Load (0.2ms)[0m  SELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", "3"]]
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 1
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "posts" [0m
+  Rendered posts/index.html.erb within layouts/application (13.7ms)
+Completed 200 OK in 111ms (Views: 104.6ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-07-06 03:26:19 +0900
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-07-06 03:26:19 +0900
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/comments.css?body=1" for 127.0.0.1 at 2013-07-06 03:26:19 +0900
+Served asset /comments.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-07-06 03:26:19 +0900
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/posts.css?body=1" for 127.0.0.1 at 2013-07-06 03:26:19 +0900
+Served asset /posts.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/comments.js?body=1" for 127.0.0.1 at 2013-07-06 03:26:19 +0900
+Served asset /comments.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/posts.js?body=1" for 127.0.0.1 at 2013-07-06 03:26:19 +0900
+Served asset /posts.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-07-06 03:26:19 +0900
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/posts" for 127.0.0.1 at 2013-07-06 03:26:21 +0900
+Processing by PostsController#index as HTML
+  [1m[35mPost Load (0.5ms)[0m  SELECT "posts".* FROM "posts" ORDER BY created_at DESC
+  [1m[36mPost Load (0.4ms)[0m  [1mSELECT "posts".* FROM "posts" ORDER BY created_at DESC LIMIT 10 OFFSET 0[0m
+  [1m[35mCategory Load (0.2ms)[0m  SELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", "3"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 1
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "posts" [0m
+  Rendered posts/index.html.erb within layouts/application (22.4ms)
+Completed 200 OK in 61ms (Views: 56.1ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-07-06 03:26:21 +0900
+Served asset /application.css - 304 Not Modified (8ms)
+
+
+Started GET "/assets/comments.css?body=1" for 127.0.0.1 at 2013-07-06 03:26:22 +0900
+Served asset /comments.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/posts.css?body=1" for 127.0.0.1 at 2013-07-06 03:26:22 +0900
+Served asset /posts.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-07-06 03:26:22 +0900
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-07-06 03:26:22 +0900
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/comments.js?body=1" for 127.0.0.1 at 2013-07-06 03:26:22 +0900
+Served asset /comments.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-07-06 03:26:22 +0900
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/posts.js?body=1" for 127.0.0.1 at 2013-07-06 03:26:22 +0900
+Served asset /posts.js - 304 Not Modified (0ms)

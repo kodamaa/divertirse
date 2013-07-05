@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(:version => 20130704140323) do
     t.string   "category_name"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.string   "color"
   end
 
   create_table "comments", :force => true do |t|

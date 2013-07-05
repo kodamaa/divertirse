@@ -2,10 +2,56 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+body {
+	background-color: #F8F8F8;
+}
+body,
+a {
+	color: black;
+}
+
+#posts-table,
+#posts-table a {
+	color: black;
+}
+
 #posts-table * td {
 	padding-right: 24px;
 }
 
+#posts-table {
+	width: 100%;
+}
+
 #posts-table th {
-	text-align : left;
+	text-align: center;
+	font-weight: normal;
+	background-color: gray;
+	color: white;
+}
+#posts-table th,
+#posts-table td {
+	padding: 2px 12px 2px 12px;
+}
+
+#posts-table tr.post-red td.post-category {
+	background-color: #ffe5f2;
+}
+#posts-table tr.post-orange td.post-category {
+	background-color: #fff2e5;
+}
+#posts-table tr.post-yellow td.post-category {
+	background-color: #ffffe5;
+}
+#posts-table tr.post-green td.post-category {
+	background-color: #e5ffe5;
+}
+#posts-table tr.post-blue td.post-category {
+	background-color: #e5ffff;
+}
+#posts-table tr.post-indigo td.post-category {
+	background-color: #e5f2ff;
+}
+#posts-table tr.post-purple td.post-category {
+	background-color: #e5e5ff;
 }
