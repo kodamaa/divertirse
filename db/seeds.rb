@@ -10,3 +10,9 @@ Category.create([{:category_name => "testA"},
 	             {:category_name => "testC"},
 	             {:category_name => "testD"},
 	             {:category_name => "testE"}])
+
+User.create([{:user_name => "userA"},
+	         {:user_name => "userB"},
+	         {:user_name => "userC"},
+	         {:user_name => "userD"},
+	         {:user_name => "userE"}])

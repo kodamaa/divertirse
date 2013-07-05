@@ -15,10 +15,16 @@ class PostsController < ApplicationController
   def new
   	@post = Post.new
     @categories = Category.all
-    @array = []
+    @users = User.all
     
+    @array = []
     @categories.each do |category|
        @array << [category.category_name, category.id]
+    end
+
+    @userArray = []
+    @users.each do |user|
+      @userArray << [user.user_name, user.id]
     end
 
   end
