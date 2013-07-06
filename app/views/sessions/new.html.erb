@@ -1,0 +1,17 @@
+<h1>ログイン画面</h1>
+
+<%= link_to 'home', posts_path %>
+
+<% if is_admin? then %>
+
+<%= link_to 'ログアウト', session_path(session[:user_id]), :confirm => 'ログアウトしますか？', :method => :delete %>
+
+<% else %>
+
+<%= form_tag sessions_path do %>
+<p><%= label_tag :name, 'アカウント名' %> <%= text_field_tag :name, params[:name] %></p>
+<p><%= label_tag :pass, 'パスワード' %> <%= password_field_tag :pass, params[:pass] %></p>
+<p><%= submit_tag "ログイン" %></p>
+<% end %>
+
+<% end %>
