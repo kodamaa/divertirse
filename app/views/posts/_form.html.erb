@@ -20,13 +20,9 @@
 	<%= f.text_area :content, :rows => 5 %>
 </div>
 
-<div class="field">
-	<%= f.label :author %>
-	<%= f.text_field :author %>
-</div>
+<%= f.select :user_id, @users %>
 
 <%= f.select :category_id, @array %>
-
 
 <div class="actions">
 	<%= f.submit %>
