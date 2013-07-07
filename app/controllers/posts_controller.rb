@@ -6,6 +6,14 @@ class PostsController < ApplicationController
     @posts = Post.all(:order => "created_at DESC")
     @posts = Post.page(params[:page])
 
+    @post = Post.new
+    @categories = Category.all
+    
+    @array = []
+    @categories.each do |category|
+       @array << [category.category_name, category.id]
+    end
+
     respond_to do |format|
       format.html
       format.json { render json: @posts }
