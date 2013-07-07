@@ -1,5 +1,9 @@
 <div id="header">
-  <%= link_to 'home', posts_path %> | <%= link_to 'new', new_post_path %>
+  <%= link_to 'home', posts_path %>
+  <% if is_admin? then %>
+   | <%= link_to 'new', new_post_path %>
+   | <%= link_to 'logout', sessions_path %>
+  <% end %>
 </div>
 
 <div id="notice"><%= notice %></div>
@@ -13,7 +17,7 @@
     <th>投稿日</th>
     <th>カテゴリ</th>
     <th>コメント</th>
-    <th> </th>
+    <% if is_admin? then %><th> </th><% end %>
 </tr>
 <% @posts.each do |post| %>
 <% category = getCategory(post.category_id) %>
@@ -23,10 +27,12 @@
     <td><%= post.created_at.strftime("%Y/%m/%d %H:%M") %></td>
     <td class="post-category"><%= category.category_name %></td>
     <td>(<%= post.comments.size %>)</td>
+    <% if is_admin? then %>
     <td><%= link_to 'Edit', edit_post_path(post) %>
         <%= link_to 'Delete', post, :confirm => "sure",
                             :method => :delete,
                             :remote => :true %></td>
+    <% end %>
 </tr>
 <% end %>
 </table>
