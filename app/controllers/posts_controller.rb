@@ -5,6 +5,11 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all(:order => "created_at DESC")
     @posts = Post.page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @posts }
+    end
   end
   
   def show
@@ -55,5 +60,11 @@ class PostsController < ApplicationController
   	@post.destroy
   	render :json => {:post => @post}
   end
+
+  def search
+    @posts = Post.where('category_id like ?', params[:q])
+    render "index"
+  end
+
 
 end
