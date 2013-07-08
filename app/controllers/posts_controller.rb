@@ -2,17 +2,20 @@
 
 class PostsController < ApplicationController
 
+  def category
+    @categories = Category.all
+    @array = []
+    @categories.each do |category|
+       @array << [category.category_name, category.id]
+    end
+  end
+
   def index
     @posts = Post.all(:order => "created_at DESC")
     @posts = Post.page(params[:page])
 
     @post = Post.new
-    @categories = Category.all
-    
-    @array = []
-    @categories.each do |category|
-       @array << [category.category_name, category.id]
-    end
+    category
 
     respond_to do |format|
       format.html
@@ -27,18 +30,12 @@ class PostsController < ApplicationController
 
   def new
   	@post = Post.new
-    @categories = Category.all
-    
-    @array = []
-    @categories.each do |category|
-       @array << [category.category_name, category.id]
-    end
+    category
 
     @users = []
     User.all.each do |user| 
       @users << [user.user_name, user.id]
     end
-
   end
 
   def create
@@ -70,17 +67,10 @@ class PostsController < ApplicationController
   end
 
   def search
-    @posts = Post.where('category_id like ?', params[:q])
+    @posts = Post.where('category_id like ?', params[:q]).page(params[:page])
+    category
 
-    @categories = Category.all
-    @array = []
-    @categories.each do |category|
-       @array << [category.category_name, category.id]
-    end
-    
     render "index"
-    
   end
-
 
 end
