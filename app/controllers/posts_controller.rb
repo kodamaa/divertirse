@@ -71,7 +71,15 @@ class PostsController < ApplicationController
 
   def search
     @posts = Post.where('category_id like ?', params[:q])
+
+    @categories = Category.all
+    @array = []
+    @categories.each do |category|
+       @array << [category.category_name, category.id]
+    end
+    
     render "index"
+    
   end
 
 
