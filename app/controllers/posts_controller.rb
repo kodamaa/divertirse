@@ -2,9 +2,25 @@
 
 class PostsController < ApplicationController
 
+  def category
+    @categories = Category.all
+    @array = []
+    @categories.each do |category|
+       @array << [category.category_name, category.id]
+    end
+  end
+
   def index
     @posts = Post.all(:order => "created_at DESC")
     @posts = Post.page(params[:page])
+
+    @post = Post.new
+    category
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @posts }
+    end
   end
   
   def show
@@ -14,18 +30,12 @@ class PostsController < ApplicationController
 
   def new
   	@post = Post.new
-    @categories = Category.all
-    
-    @array = []
-    @categories.each do |category|
-       @array << [category.category_name, category.id]
-    end
+    category
 
     @users = []
     User.all.each do |user| 
       @users << [user.user_name, user.id]
     end
-
   end
 
   def create
@@ -54,6 +64,13 @@ class PostsController < ApplicationController
   	@post = Post.find(params[:id])
   	@post.destroy
   	render :json => {:post => @post}
+  end
+
+  def search
+    @posts = Post.where('category_id like ?', params[:q]).page(params[:page])
+    category
+
+    render "index"
   end
 
 end

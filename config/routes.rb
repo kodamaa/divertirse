@@ -2,6 +2,9 @@ Blog::Application.routes.draw do
 
   resources :posts do
     resources :comments
+    collection do
+      get :search
+    end
   end
   
   resources :sessions 
