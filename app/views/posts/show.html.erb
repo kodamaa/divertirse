@@ -2,44 +2,48 @@
   <%= link_to 'home' , posts_path %>
 </div>
 
-<h1><%= @post.title %></h1>
-
+<div style="margin:5px 10px 15px 25px;">
+<div style="border-bottom: solid 2px green; border-left: solid 20px green; font-size:2em;text-indent: 0.5em;">
+<%= @post.title %>
+</div>
 <p><%= simple_format(@post.content) %></p>
-
-<h2>Comments</h2>
-<ul>
+<div style="border-bottom: solid 2px green;font-size: 1em;">
+<b>コメント</b>
+</div>
 <% comments = @post.comments.select{|comment| comment.id != nil} %>
 <% if comments.any? %>
 <% comments.each do |comment| %>
-<li id="comment_<%= comment.id %>" >
+<id="comment_<%= comment.id %>" >
 <%= simple_format(comment.body) %> (by <%= comment.commenter %>)
 <%= link_to 'delete', [comment.post, comment], :confirm => 'Sure?',
                                                :method => :delete,
                                                :remote => :true %>
-</li>
+
 <% end %>
 <% else %>
-<li>no comment yet</li>
+コメントはありません
 <% end %>
-</ul>
-
-<h2>Add a Comment</h2>
+<% category = getCategory(@post.category_id) %>
+<div style="border-bottom: solid 2px red;font-size: 1em; margin:20px 0px 0px 0px">
+<b>コメントはこちらから</b>
+</div>
 <%= form_for([@post, @comment]) do |f| %>
 
 <% if @comment.errors.any? %>
 <ul>
 <% @comment.errors.full_messages.each do |msg| %>
-<li><%= msg %></li>
+<%= msg %>
 <% end %>
 </ul>
 <% end %>
+<div style="margin:20px 0px 0px 0px">
 <div class="field">
-	<%= f.label :commenter %>
+	<%= f.label :名前 %><br/>
 	<%= f.text_field :commenter %>
 </div>
 
 <div class="field">
-	<%= f.label :body %>
+	<%= f.label :コメント %></br/>
 	<%= f.text_area :body, :rows => 5 %>
 </div>
 
@@ -48,7 +52,7 @@
 </div>
 
 <% end %>
-
+,</div>
 <script>
 $(function(){
     $('a[data-method="delete"]').on('ajax:success', function(e, data, status, xhr) {
