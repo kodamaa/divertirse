@@ -10,6 +10,15 @@
 
 <h1>記事一覧</h1>
 
+<h2>カテゴリ検索</h2>
+<%= form_tag :search_posts, method: :get do %>
+  <p>
+    <%= select_tag('q', options_for_select(@array))%>
+    
+    <%= submit_tag "検索" %>
+  </p>
+<% end %>
+
 <table id="posts-table">
 <tr>
     <th>タイトル</th>
