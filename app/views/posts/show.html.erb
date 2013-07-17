@@ -1,15 +1,16 @@
 <div id="header">
   <%= link_to 'home' , posts_path %>
 </div>
-
+<% category = getCategory(@post.category_id) %>
 <div style="margin:5px 10px 15px 25px;">
-<div style="border-bottom: solid 2px green; border-left: solid 20px green; font-size:2em;text-indent: 0.5em;">
+<div style="border-bottom: solid 2px <%= category.color %>; border-left: solid 20px <%= category.color %>; font-size:2em;text-indent: 0.5em;">
 <%= @post.title %>
 </div>
 <p><%= simple_format(@post.content) %></p>
-<div style="border-bottom: solid 2px green;font-size: 1em;">
+<div style="border-bottom: solid 2px <%= category.color %>;font-size: 1em; margin:20px 0px 0px 0px">
 <b>コメント</b>
 </div>
+<div style="margin:20px 0px 0px 0px">
 <% comments = @post.comments.select{|comment| comment.id != nil} %>
 <% if comments.any? %>
 <% comments.each do |comment| %>
@@ -23,8 +24,8 @@
 <% else %>
 コメントはありません
 <% end %>
-<% category = getCategory(@post.category_id) %>
-<div style="border-bottom: solid 2px red;font-size: 1em; margin:20px 0px 0px 0px">
+
+<div style="border-bottom: solid 2px <%= category.color %> ;font-size: 1em; margin:20px 0px 0px 0px">
 <b>コメントはこちらから</b>
 </div>
 <%= form_for([@post, @comment]) do |f| %>
@@ -47,7 +48,7 @@
 	<%= f.text_area :body, :rows => 5 %>
 </div>
 
-<div class="actions">
+<div class="actions" style="margin:10px 0px 0px 240px">
 	<%= f.submit %>
 </div>
 
