@@ -8,5 +8,5 @@ class Post < ActiveRecord::Base
                      :length => {:minimum => 5}
 
   default_scope :order => 'created_at DESC'
-  paginates_per 10
+  paginates_per 20
 end
