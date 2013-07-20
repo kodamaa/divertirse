@@ -9,7 +9,12 @@ class PostsController < ApplicationController
        @array << [category.category_name, category.id]
     end
   end
-
+  def load_users
+    @users = []
+    User.all.each do |user|
+      @users << [user.user_name, user.id]
+    end
+  end
   def index
     @posts = Post.all(:order => "created_at DESC")
     @posts = Post.page(params[:page])
@@ -43,6 +48,8 @@ class PostsController < ApplicationController
   	if @post.save
   		redirect_to posts_path, :notice => '作成されました'
   	else
+       		load_users
+		category
   		render :action => "new"
   	end
   end
