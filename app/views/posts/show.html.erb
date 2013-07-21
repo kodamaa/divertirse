@@ -16,9 +16,11 @@
 <% comments.each do |comment| %>
 <id="comment_<%= comment.id %>" >
 <%= simple_format(comment.body) %> (by <%= comment.commenter %>)
-<%= link_to 'delete', [comment.post, comment], :confirm => 'Sure?',
-                                               :method => :delete,
-                                               :remote => :true %>
+<% if is_admin? %>
+ | <%= link_to 'delete', [comment.post, comment], :confirm => 'Sure?',
+                                                  :method => :delete,
+                                                  :remote => :true %>
+<% end %>
 
 <% end %>
 <% else %>
