@@ -100,7 +100,8 @@ ja:
     messages:
       accepted: を受諾してください。
       blank: を入力してください。
-      confirmation: と確認の入力が一致しません。
+      present: は入力しないでください。
+      confirmation: と%{attribute}の入力が一致しません。
       empty: を入力してください。
       equal_to: は%{count}にしてください。
       even: は偶数にしてください。
@@ -115,10 +116,14 @@ ja:
       not_an_integer: は整数で入力してください。
       odd: は奇数にしてください。
       record_invalid: バリデーションに失敗しました。 %{errors}
+      restrict_dependent_destroy:
+        one: "%{record}が存在しているので削除出来ません。"
+        many: "%{record}が存在しているので削除出来ません。"
       taken: はすでに存在します。
       too_long: は%{count}文字以内で入力してください。
       too_short: は%{count}文字以上で入力してください。
       wrong_length: は%{count}文字で入力してください。
+      other_than: "は%{count}以外の値にしてください。"
     template:
       body: 次の項目を確認してください。
       header:
@@ -173,6 +178,7 @@ ja:
     percentage:
       format:
         delimiter: ''
+        format: "%n%"
     precision:
       format:
         delimiter: ''
@@ -188,10 +194,16 @@ ja:
       long: ! '%Y年%m月%d日(%a) %H時%M分%S秒 %z'
       short: ! '%y/%m/%d %H:%M'
     pm: 午後
-  # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
   activemodel:
     errors:
       <<: *errors
   activerecord:
     errors:
       <<: *errors
+  activerecord:
+    models:
+      post:
+    attributes:
+      post:
+        title: タイトル
+        content: 本文
