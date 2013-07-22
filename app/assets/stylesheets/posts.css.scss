@@ -34,6 +34,36 @@ a {
 	padding: 2px 12px 2px 12px;
 }
 
+.show-border-bottom {
+	border-bottom: solid 2px;
+}
+
+.show-border-left {
+	border-left: solid 20px;
+}
+
+.border-red {
+	border-color: #ffe5f2;
+}
+.border-orange {
+	border-color: #fff2e5;
+}
+.border-yellow {
+	border-color: #ffffe5;
+}
+.border-green {
+	border-color: #e5ffe5;
+}
+.border-blue {
+	border-color: #e5ffff;
+}
+.border-indigo {
+	border-color: #e5f2ff;
+}
+.border-purple {
+	border-color: #e5e5ff;
+}
+
 #posts-table tr.post-red td.post-category {
 	background-color: #ffe5f2;
 }
