@@ -20,6 +20,8 @@
 	<%= f.text_area :content, :rows => 5 %>
 </div>
 
+<%= f.datetime_select :post_date, :date_separator => "/" %>
+
 <%= f.select :user_id, @users %>
 
 <%= f.select :category_id, @array %>
