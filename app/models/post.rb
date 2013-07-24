@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-  attr_accessible :content, :title, :user_id, :category_id
+  attr_accessible :content, :title, :user_id, :category_id, :post_date
 
   has_many :comments
 
