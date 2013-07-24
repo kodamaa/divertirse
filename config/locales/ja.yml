@@ -1,4 +1,11 @@
 ja:
+  views:
+    pagination:
+      previous: «
+      next: »
+      last: »»
+      first: ««
+      truncate: ...
   date:
     abbr_day_names:
     - 日
