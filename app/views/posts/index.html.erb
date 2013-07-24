@@ -31,7 +31,7 @@
 <% @posts.each do |post| %>
 <% category = getCategory(post.category_id) %>
 <tr id="post_<%= post.id %>" class="post-<%= category.color %>">
-    <td><%= link_to post.title, post_path(post) %></td>
+    <td><%= link_to truncate(post.title, :length => 30), post_path(post) %></td>
     <td><%= getUserName(post.user_id) %></td>
     <td>
       <%= post.post_date.strftime("%Y/%m/%d %H:%M") %>
