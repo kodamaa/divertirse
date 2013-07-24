@@ -34,11 +34,7 @@
     <td><%= link_to post.title, post_path(post) %></td>
     <td><%= getUserName(post.user_id) %></td>
     <td>
-      <% if !post.post_date %>
-      <%= post.created_at.strftime("%Y/%m/%d %H:%M") %>
-      <% else %>
       <%= post.post_date.strftime("%Y/%m/%d %H:%M") %>
-      <% end %>
     </td>
     <td class="post-category"><%= category.category_name %></td>
     <td>(<%= post.comments.size %>)</td>
