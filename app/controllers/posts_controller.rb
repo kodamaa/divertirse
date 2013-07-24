@@ -16,9 +16,8 @@ class PostsController < ApplicationController
     end
   end
   def index
-    @posts = Post.all(:order => "created_at DESC")
+    @posts = Post.all(:order => "post_date DESC")
     @posts = Post.page(params[:page])
-
     @post = Post.new
     category
 
