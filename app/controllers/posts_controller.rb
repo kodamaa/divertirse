@@ -80,8 +80,9 @@ class PostsController < ApplicationController
   end
 
   def search
-    @posts = Post.where('category_id like ?', params[:q]).page(params[:page])
+    @posts = Post.where('category_id like ? and user_id like ?', params[:q], params[:w]).page(params[:page]) 
     category
+    load_users
     render "index"
   end
 
