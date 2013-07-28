@@ -5,7 +5,8 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Emanuel', :city => cities.first)
-Category.create([{:category_name => "testA", :color => "red"},
+Category.create([{:category_name => "all", :color => ""},
+	             {:category_name => "testA", :color => "red"},
 	             {:category_name => "testB", :color => "blue"},
 	             {:category_name => "testC", :color => "yellow"},
 	             {:category_name => "testD", :color => "green"},

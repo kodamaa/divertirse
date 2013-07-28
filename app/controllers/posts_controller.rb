@@ -34,7 +34,12 @@ class PostsController < ApplicationController
 
   def new
   	@post = Post.new
-    category
+    # category
+    @categories = Category.where('category_name != "all"')
+    @array = []
+    @categories.each do |category|
+       @array << [category.category_name, category.id]
+    end
 
     @users = []
     User.all.each do |user| 
@@ -73,9 +78,13 @@ class PostsController < ApplicationController
   end
 
   def search
+    if params[:q] == "1"
+      @posts = Post.all(:order => "post_date DESC")
+      @posts = Post.page(params[:page])
+    else
     @posts = Post.where('category_id like ?', params[:q]).page(params[:page])
+  end
     category
-
     render "index"
   end
 
