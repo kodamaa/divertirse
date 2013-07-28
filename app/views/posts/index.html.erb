@@ -4,20 +4,19 @@
    | <%= link_to 'new', new_post_path %>
    | <%= link_to 'logout', sessions_path %>
   <% end %>
+  <div align="right">
+  <%= form_tag :search_posts, method: :get do %>
+    <%= select_tag('q', options_for_select(@array, :selected => params[:q]))%>
+    <%= select_tag('w', options_for_select(@users, :selected => params[:w]))%>
+    <%= submit_tag "検索" %>
+  <% end %>
+  </div>
 </div>
 
 <div id="notice"><%= notice %></div>
 
 <h1>記事一覧</h1>
 
-<h2>カテゴリ検索</h2>
-<%= form_tag :search_posts, method: :get do %>
-  <p>
-    <%= select_tag('q', options_for_select(@array, :selected => params[:q]))%>
-    
-    <%= submit_tag "検索" %>
-  </p>
-<% end %>
 <% if @posts.count != 0 %>
   <table id="posts-table">
     <tr>
