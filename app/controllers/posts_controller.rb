@@ -9,6 +9,7 @@ class PostsController < ApplicationController
        @array << [category.category_name, category.id]
     end
   end
+
   def load_users
     @users = []
     User.all.each do |user|
@@ -55,6 +56,12 @@ class PostsController < ApplicationController
 
   def edit
   	@post = Post.find(params[:id])
+    category
+
+    @users = []
+    User.all.each do |user| 
+      @users << [user.user_name, user.id]
+    end
   end
 
   def update
@@ -75,7 +82,6 @@ class PostsController < ApplicationController
   def search
     @posts = Post.where('category_id like ?', params[:q]).page(params[:page])
     category
-
     render "index"
   end
 

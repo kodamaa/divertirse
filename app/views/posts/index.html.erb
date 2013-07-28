@@ -18,35 +18,42 @@
     <%= submit_tag "検索" %>
   </p>
 <% end %>
+<% if @posts.count != 0 %>
+  <table id="posts-table">
+    <tr>
+      <th>タイトル</th>
+      <th>投稿者</th>
+      <th>投稿日</th>
+      <th>カテゴリ</th>
+      <th>コメント</th>
+      <% if is_admin? then %><th> </th><% end %>
+    </tr>
 
-<table id="posts-table">
-<tr>
-    <th>タイトル</th>
-    <th>投稿者</th>
-    <th>投稿日</th>
-    <th>カテゴリ</th>
-    <th>コメント</th>
-    <% if is_admin? then %><th> </th><% end %>
-</tr>
-<% @posts.each do |post| %>
-<% category = getCategory(post.category_id) %>
-<tr id="post_<%= post.id %>" class="post-<%= category.color %>">
-    <td><%= link_to truncate(post.title, :length => 30), post_path(post) %></td>
-    <td><%= getUserName(post.user_id) %></td>
-    <td>
-      <%= post.post_date.strftime("%Y/%m/%d %H:%M") %>
-    </td>
-    <td class="post-category"><%= category.category_name %></td>
-    <td>(<%= post.comments.size %>)</td>
-    <% if is_admin? then %>
-    <td><%= link_to 'Edit', edit_post_path(post) %>
-        <%= link_to 'Delete', post, :confirm => "sure",
-                            :method => :delete,
-                            :remote => :true %></td>
+    <% @posts.each do |post| %>
+      <% category = getCategory(post.category_id) %>
+      <tr id="post_<%= post.id %>" class="post-<%= category.color %>">
+        <td><%= link_to truncate(post.title, :length => 30), post_path(post) %></td>
+        <td><%= getUserName(post.user_id) %></td>
+        <td><%= post.post_date.strftime("%Y/%m/%d %H:%M") %></td>
+        <td class="post-category"><%= category.category_name %></td>
+        <td>(<%= post.comments.size %>)</td>
+          <% if is_admin? then %>
+            <td><%= link_to 'Edit', edit_post_path(post) %>
+            <%= link_to 'Delete', post, :confirm => "sure",
+                                        :method => :delete,
+                                        :remote => :true %></td>
+          <% end %>
+      </tr>
     <% end %>
-</tr>
+  </table>
+<% elsif @posts.count == 0 %>
+  <div style="text-align:center;">
+    <p>条件に一致する投稿は見つかりませんでした。</p>
+    <p>指定した条件を解除して再検索して下さい。</p>
+    <p>(´･ω･`)しょぼーん</p>
+  </div>
 <% end %>
-</table>
+
 <%= paginate @posts %>
 <script>
 $(function(){
