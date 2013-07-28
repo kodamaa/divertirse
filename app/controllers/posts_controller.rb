@@ -21,7 +21,7 @@ class PostsController < ApplicationController
     @posts = Post.page(params[:page])
     @post = Post.new
     category
-
+    load_users
     respond_to do |format|
       format.html
       format.json { render json: @posts }
