@@ -9,6 +9,15 @@ class PostsController < ApplicationController
        @array << [category.category_name, category.id]
     end
   end
+
+  def category_notAll
+    @categories = Category.where('category_name != "all"')
+    @array = []
+    @categories.each do |category|
+       @array << [category.category_name, category.id]
+    end
+  end
+
   def load_users
     @users = []
     User.all.each do |user|
@@ -34,12 +43,8 @@ class PostsController < ApplicationController
 
   def new
   	@post = Post.new
-    # category
-    @categories = Category.where('category_name != "all"')
-    @array = []
-    @categories.each do |category|
-       @array << [category.category_name, category.id]
-    end
+    
+    category_notAll
 
     @users = []
     User.all.each do |user| 
@@ -60,6 +65,13 @@ class PostsController < ApplicationController
 
   def edit
   	@post = Post.find(params[:id])
+    
+    category_notAll
+
+    @users = []
+    User.all.each do |user| 
+      @users << [user.user_name, user.id]
+    end
   end
 
   def update
