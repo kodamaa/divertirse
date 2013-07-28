@@ -55,6 +55,12 @@ class PostsController < ApplicationController
 
   def edit
   	@post = Post.find(params[:id])
+    category
+
+    @users = []
+    User.all.each do |user| 
+      @users << [user.user_name, user.id]
+    end
   end
 
   def update
