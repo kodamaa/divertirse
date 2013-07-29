@@ -5,6 +5,7 @@ class PostsController < ApplicationController
   def category
     @categories = Category.all
     @array = []
+    @array << ["カテゴリを選択して下さい"]
     @categories.each do |category|
        @array << [category.category_name, category.id]
     end
@@ -12,6 +13,7 @@ class PostsController < ApplicationController
 
   def load_users
     @users = []
+    @users << ["投稿者を選択して下さい"]
     User.all.each do |user|
       @users << [user.user_name, user.id]
     end
@@ -35,7 +37,12 @@ class PostsController < ApplicationController
 
   def new
   	@post = Post.new
-    category
+
+    @categories = Category.all
+    @array = []
+    @categories.each do |category|
+       @array << [category.category_name, category.id]
+    end
 
     @users = []
     User.all.each do |user| 
@@ -80,7 +87,16 @@ class PostsController < ApplicationController
   end
 
   def search
-    @posts = Post.where('category_id like ? and user_id like ?', params[:q], params[:w]).page(params[:page]) 
+    if ((params[:q] == "カテゴリを選択して下さい") && (params[:w] != "投稿者を選択して下さい"))
+      @posts = Post.where('user_id like ?', params[:w]).page(params[:page]) 
+    elsif ((params[:q] != "カテゴリを選択して下さい") && (params[:w] == "投稿者を選択して下さい"))
+      @posts = Post.where('category_id like ?', params[:q]).page(params[:page]) 
+    elsif ((params[:q] == "カテゴリを選択して下さい") && (params[:w] == "投稿者を選択して下さい"))
+      @posts = Post.all(:order => "post_date DESC")
+      @posts = Post.page(params[:page])
+    else
+      @posts = Post.where('category_id like ? and user_id like ?', params[:q], params[:w]).page(params[:page]) 
+    end
     category
     load_users
     render "index"
