@@ -46,3 +46,9 @@ group :development do
   gem 'pry-debugger'
   gem 'rails_best_practices', :require => false
 end
+
+group :test do
+  gem "rspec"
+  gem "rspec-rails"
+end
+
