@@ -3,11 +3,12 @@
 class PostsController < ApplicationController
 
   def category
-    @categories = Category.all
-    @array = []
-    @categories.each do |category|
-       @array << [category.category_name, category.id]
-    end
+    # @categories = Category.all
+    # @array = []
+    # @categories.each do |category|
+    #    @array << [category.category_name, category.id]
+    # end
+    @array = Category.all.map {|category| [category.category_name, category.id]}
   end
 
   def load_users
