@@ -1,22 +1,30 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
-#   Mayor.create(:name => 'Emanuel', :city => cities.first)
-Category.create([{:category_name => "testA", :color => "red"},
-	             {:category_name => "testB", :color => "blue"},
-	             {:category_name => "testC", :color => "yellow"},
-	             {:category_name => "testD", :color => "green"},
-	             {:category_name => "testE", :color => "orange"},
-	             {:category_name => "testF", :color => "purple"},
-	             {:category_name => "testG", :color => "indigo"}
-	             ])
+#coding: utf-8
 
-User.create([{:user_name => "admin", :admin_flag => 1},
-	         {:user_name => "userA", :admin_flag => 0},
-	         {:user_name => "userB", :admin_flag => 0},
-	         {:user_name => "userC", :admin_flag => 0},
-	         {:user_name => "userD", :admin_flag => 0}
-	         ])
+Category.delete_all
+Category.connection.execute("delete from sqlite_sequence where name='categories'")
+Category.create([
+  {:category_name => "カテゴリA", :color => "red"},
+  {:category_name => "カテゴリB", :color => "blue"},
+  {:category_name => "カテゴリC", :color => "yellow"},
+  {:category_name => "カテゴリD", :color => "green"},
+  {:category_name => "カテゴリE", :color => "orange"},
+  {:category_name => "カテゴリF", :color => "purple"},
+  {:category_name => "カテゴリG", :color => "indigo"}
+])
+
+User.delete_all
+Category.connection.execute("delete from sqlite_sequence where name='users'")
+User.create([
+  {:user_name => "admin",  :admin_flag => 1},
+  {:user_name => "ユーザA", :admin_flag => 0},
+  {:user_name => "ユーザB", :admin_flag => 0},
+  {:user_name => "ユーザC", :admin_flag => 0},
+  {:user_name => "ユーザD", :admin_flag => 0}
+])
+
+Post.delete_all
+Category.connection.execute("delete from sqlite_sequence where name='posts'")
+Post.create([
+  {:title => "title", :content => "content", :post_date => "2013-01-01 00:00:00.000", :user_id => 1, :category_id => 1},
+  {:title => "テスト", :content => "あああああああ", :post_date => "2013-01-02 00:00:00.000", :user_id => 2, :category_id => 2}
+])
