@@ -46,3 +46,8 @@ group :development do
   gem 'pry-debugger'
   gem 'rails_best_practices', :require => false
 end
+
+gem 'twitter-bootstrap-rails'
+gem 'less-rails'
+
+gem 'flatui-rails'

@@ -13,9 +13,9 @@
 <h2>カテゴリ検索</h2>
 <%= form_tag :search_posts, method: :get do %>
   <p>
-    <%= select_tag('q', options_for_select(@array, :selected => params[:q]))%>
+    <%= select_tag('q', options_for_select(@array, :selected => params[:q]), class: "dropdown-toggle")%>
     
-    <%= submit_tag "検索" %>
+    <%= submit_tag( "検索", class: "btn btn-inline") %>
   </p>
 <% end %>
 <% if @posts.count != 0 %>
