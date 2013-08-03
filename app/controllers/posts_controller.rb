@@ -36,11 +36,7 @@ class PostsController < ApplicationController
   def new
   	@post = Post.new
     category
-
-    @users = []
-    User.all.each do |user| 
-      @users << [user.user_name, user.id]
-    end
+    load_users
   end
 
   def create
@@ -57,11 +53,8 @@ class PostsController < ApplicationController
   def edit
   	@post = Post.find(params[:id])
     category
-
-    @users = []
-    User.all.each do |user| 
-      @users << [user.user_name, user.id]
-    end
+      
+    load_users
   end
 
   def update
