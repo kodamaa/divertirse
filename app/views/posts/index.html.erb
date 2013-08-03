@@ -4,11 +4,11 @@
    | <%= link_to 'new', new_post_path %>
    | <%= link_to 'logout', sessions_path %>
   <% end %>
-  <div align="right">
+  <div style="float:right;">
   <%= form_tag :search_posts, method: :get do %>
-    <%= select_tag('q', options_for_select(@array, :selected => params[:q]))%>
-    <%= select_tag('w', options_for_select(@users, :selected => params[:w]))%>
-    <%= submit_tag "検索" %>
+    <%= select_tag('q', options_for_select(@array, :selected => params[:q]),:prompt => "カテゴリを選択して下さい", style: "vertical-align:middle")%>
+    <%= select_tag('w', options_for_select(@users, :selected => params[:w]),:prompt => "投稿者を選択して下さい", style: "vertical-align:middle") %>
+    <%= submit_tag( "検索", style: "vertical-align:middle")  %>
   <% end %>
   </div>
 </div>
