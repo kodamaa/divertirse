@@ -3,19 +3,10 @@
 class PostsController < ApplicationController
 
   def category
-    # @categories = Category.all
-    # @array = []
-    # @categories.each do |category|
-    #    @array << [category.category_name, category.id]
-    # end
     @array = Category.all.map {|category| [category.category_name, category.id]}
   end
 
   def load_users
-    # @users = []
-    # User.all.each do |user|
-    #   @users << [user.user_name, user.id]
-    # end
     @users = User.all.map {|user| [user.user_name, user.id]}
   end
   def index
@@ -38,16 +29,8 @@ class PostsController < ApplicationController
   def new
   	@post = Post.new
 
-    @categories = Category.all
-    @array = []
-    @categories.each do |category|
-       @array << [category.category_name, category.id]
-    end
-
-    @users = []
-    User.all.each do |user| 
-      @users << [user.user_name, user.id]
-    end
+    category
+    load_users
   end
 
   def create
@@ -64,11 +47,8 @@ class PostsController < ApplicationController
   def edit
   	@post = Post.find(params[:id])
     category
-
-    @users = []
-    User.all.each do |user| 
-      @users << [user.user_name, user.id]
-    end
+      
+    load_users
   end
 
   def update
