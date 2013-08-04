@@ -12,10 +12,11 @@ class PostsController < ApplicationController
   end
 
   def load_users
-    @users = []
-    User.all.each do |user|
-      @users << [user.user_name, user.id]
-    end
+    # @users = []
+    # User.all.each do |user|
+    #   @users << [user.user_name, user.id]
+    # end
+    @users = User.all.map {|user| [user.user_name, user.id]}
   end
   def index
     @posts = Post.all(:order => "post_date DESC")
@@ -86,16 +87,17 @@ class PostsController < ApplicationController
   end
 
   def search
-    # if ((params[:q] == "カテゴリを選択して下さい") && (params[:w] != "投稿者を選択して下さい"))
-    #   @posts = Post.where('user_id like ?', params[:w]).page(params[:page]) 
-    # elsif ((params[:q] != "カテゴリを選択して下さい") && (params[:w] == "投稿者を選択して下さい"))
-    #   @posts = Post.where('category_id like ?', params[:q]).page(params[:page]) 
-    # elsif ((params[:q] == "カテゴリを選択して下さい") && (params[:w] == "投稿者を選択して下さい"))
-    #   @posts = Post.all(:order => "post_date DESC")
-    #   @posts = Post.page(params[:page])
-    # else
+    if ((params[:q] == "") && (params[:w] != ""))
+      @posts = Post.where('user_id like ?', params[:w]).page(params[:page]) 
+    elsif ((params[:q] != "") && (params[:w] == ""))
+      @posts = Post.where('category_id like ?', params[:q]).page(params[:page]) 
+    elsif ((params[:q] != "") && (params[:w] != ""))
       @posts = Post.where('category_id like ? and user_id like ?', params[:q], params[:w]).page(params[:page]) 
-    # end
+    elsif ((params[:q] == "") && (params[:w] == ""))
+      @posts = Post.all(:order => "post_date DESC")
+      @posts = Post.page(params[:page])
+    end
+
     category
     load_users
     render "index"
