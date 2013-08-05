@@ -3,25 +3,18 @@
 class PostsController < ApplicationController
 
   def category
-    @categories = Category.all
-    @array = []
-    @categories.each do |category|
-       @array << [category.category_name, category.id]
-    end
+    @array = Category.all.map {|category| [category.category_name, category.id]}
   end
 
   def load_users
-    @users = []
-    User.all.each do |user|
-      @users << [user.user_name, user.id]
-    end
+    @users = User.all.map {|user| [user.user_name, user.id]}
   end
   def index
     @posts = Post.all(:order => "post_date DESC")
     @posts = Post.page(params[:page])
     @post = Post.new
     category
-
+    load_users
     respond_to do |format|
       format.html
       format.json { render json: @posts }
@@ -35,12 +28,9 @@ class PostsController < ApplicationController
 
   def new
   	@post = Post.new
-    category
 
-    @users = []
-    User.all.each do |user| 
-      @users << [user.user_name, user.id]
-    end
+    category
+    load_users
   end
 
   def create
@@ -57,11 +47,8 @@ class PostsController < ApplicationController
   def edit
   	@post = Post.find(params[:id])
     category
-
-    @users = []
-    User.all.each do |user| 
-      @users << [user.user_name, user.id]
-    end
+      
+    load_users
   end
 
   def update
@@ -80,8 +67,19 @@ class PostsController < ApplicationController
   end
 
   def search
-    @posts = Post.where('category_id like ?', params[:q]).page(params[:page])
+    if ((params[:q] == "") && (params[:w] != ""))
+      @posts = Post.where('user_id like ?', params[:w]).page(params[:page]) 
+    elsif ((params[:q] != "") && (params[:w] == ""))
+      @posts = Post.where('category_id like ?', params[:q]).page(params[:page]) 
+    elsif ((params[:q] != "") && (params[:w] != ""))
+      @posts = Post.where('category_id like ? and user_id like ?', params[:q], params[:w]).page(params[:page]) 
+    elsif ((params[:q] == "") && (params[:w] == ""))
+      @posts = Post.all(:order => "post_date DESC")
+      @posts = Post.page(params[:page])
+    end
+
     category
+    load_users
     render "index"
   end
 
