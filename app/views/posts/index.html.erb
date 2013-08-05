@@ -1,0 +1,69 @@
+<div id="header">
+  <%= link_to 'home', posts_path %>
+  <% if is_admin? then %>
+   | <%= link_to 'new', new_post_path %>
+   | <%= link_to 'logout', sessions_path %>
+  <% end %>
+  <div style="float:right;">
+  <%= form_tag :search_posts, method: :get do %>
+    <%= select_tag('q', options_for_select(@array, :selected => params[:q]),:prompt => "カテゴリを選択して下さい", style: "vertical-align:middle")%>
+    <%= select_tag('w', options_for_select(@users, :selected => params[:w]),:prompt => "投稿者を選択して下さい", style: "vertical-align:middle") %>
+    <%= submit_tag( "検索", style: "vertical-align:middle")  %>
+  <% end %>
+  </div>
+</div>
+
+<div id="notice"><%= notice %></div>
+
+<h1>記事一覧</h1>
+
+<% if @posts.count != 0 %>
+  <table id="posts-table">
+    <tr>
+      <th>タイトル</th>
+      <th>投稿者</th>
+      <th>投稿日</th>
+      <th>カテゴリ</th>
+      <th>コメント</th>
+      <% if is_admin? then %><th> </th><% end %>
+    </tr>
+
+    <% @posts.each do |post| %>
+      <% category = getCategory(post.category_id) %>
+      <tr id="post_<%= post.id %>" class="post-<%= category.color %>">
+        <td><%= link_to truncate(post.title, :length => 30), post_path(post) %></td>
+        <td><%= getUserName(post.user_id) %></td>
+        <td><%= post.post_date.strftime("%Y/%m/%d %H:%M") %></td>
+        <td class="post-category"><%= category.category_name %></td>
+        <td>(<%= post.comments.size %>)</td>
+          <% if is_admin? then %>
+            <td><%= link_to 'Edit', edit_post_path(post) %>
+            <%= link_to 'Delete', post, :confirm => "sure",
+                                        :method => :delete,
+                                        :remote => :true %></td>
+          <% end %>
+      </tr>
+    <% end %>
+  </table>
+<% elsif @posts.count == 0 %>
+  <div style="text-align:center;">
+    <p>条件に一致する投稿は見つかりませんでした。</p>
+    <p>指定した条件を解除して再検索して下さい。</p>
+    <p>(´･ω･`)しょぼーん</p>
+  </div>
+<% end %>
+
+<%= paginate @posts %>
+<script>
+$(function(){
+	setTimeout(function(){
+		$('#notice').fadeOut("slow");
+	},800);
+
+    $('a[data-method="delete"]').on('ajax:success', function(e, data, status, xhr) {
+    $('#post_'+data.post.id).fadeOut("slow");
+    }
+	);
+	
+});
+</script>

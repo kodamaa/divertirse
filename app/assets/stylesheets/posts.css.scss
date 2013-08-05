@@ -1,0 +1,69 @@
+// Place all the styles related to the Posts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+	background-color: #F8F8F8;
+}
+body,
+a {
+	color: black;
+}
+
+#posts-table,
+#posts-table a {
+	color: black;
+}
+
+#posts-table * td {
+	padding-right: 24px;
+}
+
+#posts-table {
+	width: 100%;
+}
+
+#posts-table th {
+	text-align: center;
+	font-weight: normal;
+	background-color: gray;
+	color: white;
+}
+#posts-table th,
+#posts-table td {
+	padding: 2px 12px 2px 12px;
+}
+
+.show-border-bottom {
+	border-bottom: solid 1px black;
+}
+
+.background-red,
+#posts-table tr.post-red td.post-category {
+	background-color: #ffe5f2;
+}
+.background-orange,
+#posts-table tr.post-orange td.post-category {
+	background-color: #fff2e5;
+}
+.background-yellow,
+#posts-table tr.post-yellow td.post-category {
+	background-color: #ffffe5;
+}
+.background-green,
+#posts-table tr.post-green td.post-category {
+	background-color: #e5ffe5;
+}
+.background-blue,
+#posts-table tr.post-blue td.post-category {
+	background-color: #e5ffff;
+}
+.background-indigo,
+#posts-table tr.post-indigo td.post-category {
+	background-color: #e5f2ff;
+}
+.background-purple,
+#posts-table tr.post-purple td.post-category {
+	background-color: #e5e5ff;
+}
+
