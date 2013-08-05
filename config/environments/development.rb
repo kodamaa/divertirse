@@ -34,4 +34,7 @@ Blog::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # Log rotation
+  config.logger = Logger.new("log/development.log", 3, 10 * 1024 * 1024)
 end
