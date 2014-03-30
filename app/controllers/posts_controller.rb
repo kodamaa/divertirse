@@ -3,11 +3,11 @@
 class PostsController < ApplicationController
 
   def category
-    @array = Category.all.map {|category| [category.category_name, category.id]}
+    @array = Category.find(:all, :order => "created_at").map {|category| [category.category_name, category.id]}
   end
 
   def load_users
-    @users = User.all.map {|user| [user.user_name, user.id]}
+    @users = User.find(:all, :order => "created_at").map {|user| [user.user_name, user.id]}
   end
   def index
     @posts = Post.all(:order => "post_date DESC")
