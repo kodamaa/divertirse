@@ -32,9 +32,9 @@
       <% category = getCategory(post.category_id) %>
       <tr id="post_<%= post.id %>" class="post-<%= category.color %>">
         <td><%= link_to truncate(post.title, :length => 30), post_path(post) %></td>
-        <td><%= getUserName(post.user_id) %></td>
-        <td><%= post.post_date.strftime("%Y/%m/%d %H:%M") %></td>
-        <td class="post-category"><%= category.category_name %></td>
+        <td><%= link_to getUserName(post.user_id), :controller => "posts", :action => "search", :q => "", :w => post.user_id %></td>
+        <td><%= post.post_date.strftime("%Y/%m/%d") %></td>
+        <td class="post-category"><%= link_to category.category_name, :controller => "posts", :action => "search", :q => category.id, :w => "" %></td>
         <td>(<%= post.comments.size %>)</td>
           <% if is_admin? then %>
             <td><%= link_to 'Edit', edit_post_path(post) %>

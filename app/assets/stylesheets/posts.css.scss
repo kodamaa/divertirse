@@ -15,6 +15,10 @@ a {
 	color: black;
 }
 
+#posts-table tr {
+	line-height: 32px;
+}
+
 #posts-table * td {
 	padding-right: 24px;
 }
@@ -67,3 +71,10 @@ a {
 	background-color: #e5e5ff;
 }
 
+input#post_title {
+	width: 80%;
+}
+textarea#post_content {
+	width: 80%;
+	height: 400px;
+}
